@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Access One × Popcorn · Validar antes de escalar — Modelo de adquisición digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   POPCORN · BRAND SYSTEM (propuesta comercial · salud premium)
+   Violeta eléctrico + cian · tipografía geométrica redondeada
+   ============================================================ */
+:root{
+  --violet-900:#250a4f;
+  --violet-800:#34107a;
+  --violet-700:#4a16a8;
+  --violet-600:#5a18cc;   /* base */
+  --violet-500:#6e28e8;
+  --violet-glow:#7b34f0;
+  --cyan:#1fe8d8;
+  --cyan-bright:#5cf4e8;
+  --cyan-deep:#12b9ad;
+  --ink:#0e0524;
+  --white:#ffffff;
+  --w-80:rgba(255,255,255,.80);
+  --w-65:rgba(255,255,255,.65);
+  --w-45:rgba(255,255,255,.45);
+  --card:rgba(255,255,255,.045);
+  --card-2:rgba(13,4,40,.45);
+  --line:rgba(255,255,255,.14);
+  --line-soft:rgba(255,255,255,.08);
+  --cyan-line:rgba(31,232,216,.35);
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--violet-600);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  line-height:1.55;
+}
+/* fondo profundo con degradés suaves */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(1200px 700px at 78% -8%, rgba(123,52,240,.55), transparent 60%),
+    radial-gradient(1000px 800px at -10% 110%, rgba(31,232,216,.10), transparent 55%),
+    linear-gradient(160deg,#4d12b0 0%,#5a18cc 42%,#3d0f95 100%);
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+
+h1,h2,h3,h4,.display{font-family:'Poppins',sans-serif;font-style:normal}
+em,i{font-style:normal} /* sin cursivas */
+
+/* ============ HEADER FIJO ============ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:90;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 38px;
+  transition:background .4s var(--ease),padding .4s var(--ease),box-shadow .4s var(--ease);
+}
+.topbar.scrolled{
+  background:rgba(40,12,100,.72);
+  backdrop-filter:blur(14px);
+  padding:13px 38px;
+  box-shadow:0 1px 0 rgba(255,255,255,.07);
+}
+.brand-tag{
+  font-family:'Poppins';font-weight:600;font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--w-65);
+  display:flex;align-items:center;gap:9px;
+}
+.brand-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+
+/* Logo POPCORN oficial */
+.logo{display:flex;align-items:center;gap:10px}
+.logo-pic{height:30px;width:auto;display:block}
+.logo-pic.close{height:54px}
+
+/* ============ PROGRESO + NAV LATERAL ============ */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--cyan),var(--cyan-bright));z-index:100;box-shadow:0 0 14px var(--cyan)}
+.dots{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:13px}
+.dots a{position:relative;width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.28);transition:all .3s var(--ease)}
+.dots a:hover{background:var(--w-65);transform:scale(1.25)}
+.dots a.active{background:var(--cyan);box-shadow:0 0 12px var(--cyan);transform:scale(1.35)}
+.dots a span{
+  position:absolute;right:20px;top:50%;transform:translateY(-50%) translateX(6px);
+  white-space:nowrap;font-family:'Poppins';font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--white);background:rgba(20,6,55,.9);padding:5px 10px;border-radius:6px;
+  opacity:0;pointer-events:none;transition:all .25s var(--ease);border:1px solid var(--line-soft);
+}
+.dots a:hover span{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* ============ SECCIONES ============ */
+section{
+  position:relative;
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 38px 96px;
+}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;position:relative;z-index:2}
+
+/* footer micro por sección */
+.sfoot{
+  position:absolute;left:38px;right:38px;bottom:30px;z-index:3;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'Poppins';font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--w-45);
+}
+.sfoot .num{color:var(--cyan)}
+
+/* eyebrow */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:'Poppins';font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:26px;
+}
+.eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+
+/* títulos */
+.h-xl{font-weight:700;font-size:clamp(2.6rem,6.6vw,5.4rem);line-height:1.02;letter-spacing:-.02em}
+.h-lg{font-weight:700;font-size:clamp(2rem,4.6vw,3.6rem);line-height:1.06;letter-spacing:-.015em}
+.h-md{font-weight:600;font-size:clamp(1.4rem,2.4vw,2rem);line-height:1.15}
+.cy{color:var(--cyan)}
+.lead{font-size:clamp(1.05rem,1.55vw,1.3rem);color:var(--w-80);max-width:760px;font-weight:400;line-height:1.65}
+.muted{color:var(--w-65)}
+.kicker{font-family:'Poppins';font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--cyan)}
+b,strong{color:#fff;font-weight:600}
+
+/* ============ ANIMACIONES (scroll reveal) ============ */
+.r{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.r.in{opacity:1;transform:none}
+.r.d1{transition-delay:.09s}.r.d2{transition-delay:.18s}.r.d3{transition-delay:.27s}
+.r.d4{transition-delay:.36s}.r.d5{transition-delay:.45s}.r.d6{transition-delay:.54s}.r.d7{transition-delay:.63s}.r.d8{transition-delay:.72s}
+.scale-in{opacity:0;transform:scale(.94);transition:all .9s var(--ease)}
+.scale-in.in{opacity:1;transform:none}
+
+/* ============ HERO ============ */
+#hero{justify-content:center}
+.hero-orbits{position:absolute;right:-160px;top:50%;transform:translateY(-50%);width:760px;height:760px;z-index:0;opacity:.5;pointer-events:none}
+.hero-orbits div{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.12);inset:0}
+.hero-orbits div:nth-child(2){inset:90px}
+.hero-orbits div:nth-child(3){inset:190px}
+.hero-orbits .core{inset:300px;border:none;background:radial-gradient(circle,rgba(31,232,216,.28),transparent 70%)}
+.hero-eyebrow{margin-bottom:30px}
+.hero-title{font-weight:700;font-size:clamp(2.7rem,7.4vw,6rem);line-height:.98;letter-spacing:-.03em;max-width:16ch}
+.hero-sub{margin-top:30px;font-size:clamp(1.05rem,1.7vw,1.4rem);color:var(--w-80);max-width:660px;line-height:1.6}
+.hero-tags{margin-top:38px;display:flex;flex-wrap:wrap;gap:10px}
+.tag{font-family:'Poppins';font-weight:500;font-size:13px;letter-spacing:.02em;color:var(--w-80);border:1px solid var(--line);padding:9px 18px;border-radius:100px;background:rgba(255,255,255,.04)}
+.scrollcue{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--w-45);font-family:'Poppins';font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.scrollcue .mouse{width:22px;height:34px;border:1.5px solid var(--w-45);border-radius:12px;position:relative}
+.scrollcue .mouse::after{content:'';position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:3px;background:var(--cyan);transform:translateX(-50%);animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+
+/* ============ CARDS ============ */
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:var(--card);border:1px solid var(--line-soft);border-radius:20px;padding:30px;
+  transition:transform .4s var(--ease),border-color .4s var(--ease),background .4s var(--ease);
+  position:relative;overflow:hidden;
+}
+.card:hover{transform:translateY(-6px);border-color:var(--cyan-line);background:rgba(255,255,255,.07)}
+.card .ico{
+  width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;
+  background:rgba(31,232,216,.12);border:1px solid var(--cyan-line);color:var(--cyan);margin-bottom:20px;
+}
+.card .ico svg{width:24px;height:24px}
+.card h3{font-size:1.2rem;font-weight:600;margin-bottom:9px}
+.card p{color:var(--w-65);font-size:.96rem;line-height:1.6}
+.card .num-tag{font-family:'Poppins';font-weight:700;font-size:13px;color:var(--cyan);letter-spacing:.1em;margin-bottom:14px;display:block}
+
+/* quotes */
+.quote{border-left:2px solid var(--cyan);padding-left:22px;color:var(--white);font-family:'Poppins';font-weight:500;font-size:clamp(1.1rem,1.7vw,1.5rem);line-height:1.4}
+
+/* stat row */
+.stats{display:flex;flex-wrap:wrap;gap:14px 56px;border-top:1px solid var(--line-soft);padding-top:34px;margin-top:46px}
+.stat .v{font-family:'Poppins';font-weight:700;font-size:clamp(2rem,4vw,3rem);color:var(--cyan);line-height:1}
+.stat .l{font-family:'Poppins';font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--w-65);margin-top:8px;max-width:22ch}
+.stats.sm{gap:14px 44px}
+.stats.sm .v{font-size:clamp(1.45rem,2.5vw,2rem)}
+.stats.sm .l{font-size:10px;letter-spacing:.14em;margin-top:6px}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.chip{
+  font-family:'Poppins';font-weight:500;font-size:1rem;padding:14px 24px;border-radius:14px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line-soft);transition:all .35s var(--ease)
+}
+.chip:hover{border-color:var(--cyan-line);color:var(--cyan);transform:translateY(-3px)}
+
+/* ============ DECISION FLOW ============ */
+.flowline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:14px;position:relative}
+.flowline .step{position:relative;padding:0 18px}
+.flowline .step .n{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--cyan-line);color:var(--cyan);display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:700;margin-bottom:18px;background:rgba(31,232,216,.08)}
+.flowline .step h4{font-size:1.05rem;font-weight:600;margin-bottom:7px}
+.flowline .step p{font-size:.88rem;color:var(--w-65);line-height:1.55}
+.flowline .step::after{content:'';position:absolute;top:23px;left:calc(46px + 14px);right:-6px;height:1.5px;background:linear-gradient(90deg,var(--cyan-line),transparent);transform-origin:left;transition:transform 1s var(--ease) .3s;transform:scaleX(0)}
+.flowline.in .step::after{transform:scaleX(1)}
+.flowline .step:last-child::after{display:none}
+
+.bigstatement{
+  margin-top:8px;font-family:'Poppins';font-weight:600;font-size:clamp(1.5rem,3.2vw,2.5rem);line-height:1.2;letter-spacing:-.01em;max-width:18ch
+}
+
+/* ============ PIPE / FLUJO ============ */
+.pipe{display:flex;flex-wrap:wrap;align-items:stretch;gap:12px;margin-top:10px}
+.pipe .node{
+  flex:1;min-width:140px;background:var(--card);border:1px solid var(--line-soft);border-radius:16px;padding:22px 18px;text-align:center;
+  position:relative;transition:all .4s var(--ease)
+}
+.pipe .node:hover{border-color:var(--cyan-line);transform:translateY(-5px)}
+.pipe .node .k{font-family:'Poppins';font-weight:700;font-size:12px;color:var(--cyan);letter-spacing:.1em;display:block;margin-bottom:9px}
+.pipe .node .t{font-family:'Poppins';font-weight:600;font-size:1.02rem}
+.pipe .node p{font-size:.8rem;color:var(--w-45);margin-top:6px;line-height:1.4}
+.pipe .arrow{display:flex;align-items:center;color:var(--cyan);opacity:.6}
+
+/* ============ MULTIPLICADOR ============ */
+.multiplier{display:grid;grid-template-columns:300px 1fr;gap:46px;align-items:center}
+.source{
+  background:linear-gradient(160deg,rgba(31,232,216,.16),rgba(31,232,216,.03));
+  border:1.5px solid var(--cyan-line);border-radius:22px;padding:38px 30px;text-align:center;
+}
+.source .big{font-family:'Poppins';font-weight:700;font-size:3.4rem;color:var(--cyan);line-height:1}
+.source h3{font-size:1.3rem;font-weight:600;margin:10px 0 6px}
+.source p{color:var(--w-65);font-size:.92rem}
+.outputs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.out{
+  background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:18px 14px;text-align:center;
+  font-family:'Poppins';font-weight:500;font-size:.92rem;transition:all .35s var(--ease)
+}
+.out:hover{border-color:var(--cyan-line);color:var(--cyan);transform:translateY(-4px)}
+.out .oi{width:32px;height:32px;margin:0 auto 10px;color:var(--cyan);opacity:.85}
+.out .oi svg{width:100%;height:100%}
+
+/* ============ INVERSIÓN ============ */
+.invest{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:start}
+.invest-card{
+  background:linear-gradient(160deg,rgba(31,232,216,.14),rgba(13,4,40,.4));
+  border:1.5px solid var(--cyan-line);border-radius:24px;padding:40px;
+}
+.invest-card .per{color:var(--w-65);font-family:'Poppins';font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:12px;margin-bottom:8px;display:block}
+.price-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:20px 0;border-bottom:1px solid var(--line-soft)}
+.price-row:last-child{border-bottom:none}
+.price-row .pl{font-family:'Poppins';font-weight:600;font-size:1.02rem}
+.price-row .pl small{display:block;font-weight:400;font-size:.82rem;color:var(--w-45);margin-top:4px;font-family:'Inter';max-width:34ch}
+.price-row .pv{font-family:'Poppins';font-weight:700;font-size:1.3rem;color:var(--cyan);white-space:nowrap}
+.bullets{list-style:none;display:flex;flex-direction:column;gap:18px}
+.bullets li{display:flex;gap:14px;align-items:flex-start}
+.bullets li .bi{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(31,232,216,.12);border:1px solid var(--cyan-line);color:var(--cyan);display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:700;font-size:13px;margin-top:2px}
+.bullets li p{color:var(--w-80);font-size:1rem;line-height:1.55}
+
+/* ============ WIREFRAME / DASHBOARD ============ */
+.landing{display:grid;grid-template-columns:.92fr 1.08fr;gap:46px;align-items:center}
+.wf{background:rgba(13,4,40,.5);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:11px}
+.wf-bar{display:flex;gap:6px;padding-bottom:12px;border-bottom:1px solid var(--line-soft);margin-bottom:4px;align-items:center}
+.wf-bar span:not(.wf-ttl){flex:none;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18)}
+.wf-bar .wf-ttl{margin-left:10px;min-width:0;flex:1;font-family:'Poppins';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--w-45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wf-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.wf-kpi{background:rgba(255,255,255,.05);border:1px solid var(--line-soft);border-radius:9px;padding:13px 8px;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.wf-kpi .kk{font-family:'Poppins';font-size:8px;line-height:1.1;letter-spacing:.1em;text-transform:uppercase;color:var(--w-45)}
+.wf-kpi .kv{font-family:'Poppins';font-weight:700;font-size:.92rem;line-height:1;color:var(--cyan);white-space:nowrap}
+.wf-chart{height:120px;background:linear-gradient(180deg,rgba(31,232,216,.08),rgba(255,255,255,.02));border:1px solid var(--line-soft);border-radius:10px;display:flex;align-items:flex-end;gap:8px;padding:14px}
+.wf-chart i{flex:1;background:linear-gradient(180deg,var(--cyan),rgba(31,232,216,.25));border-radius:4px 4px 0 0;display:block}
+.wf-row{background:rgba(255,255,255,.05);border-radius:9px}
+.lp-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin:10px 0 24px}
+.lp-list li{display:flex;gap:12px;align-items:flex-start;color:var(--w-80)}
+.lp-list li svg{width:20px;height:20px;color:var(--cyan);flex:none;margin-top:3px}
+.note-pill{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:100px;padding:11px 20px;font-size:.86rem;color:var(--w-65)}
+.note-pill b{color:var(--cyan);font-family:'Poppins';font-weight:600}
+
+/* ============ ALCANCE (incluye / no incluye) ============ */
+.scope{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.scope-col{background:var(--card);border:1px solid var(--line-soft);border-radius:20px;padding:32px}
+.scope-col.no{background:rgba(13,4,40,.35)}
+.scope-col h3{font-family:'Poppins';font-weight:600;font-size:1.2rem;margin-bottom:6px}
+.scope-col .sub{font-size:.86rem;color:var(--w-45);margin-bottom:22px}
+.scope-col ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+.scope-col li{display:flex;gap:12px;align-items:flex-start;font-size:.97rem;color:var(--w-80);line-height:1.5}
+.scope-col li svg{width:19px;height:19px;flex:none;margin-top:3px}
+.scope-col.yes li svg{color:var(--cyan)}
+.scope-col.no li svg{color:var(--w-45)}
+.scope-col.no li{color:var(--w-65)}
+
+/* ============ EVO / BANDA STATEMENT ============ */
+.evo{position:relative;overflow:hidden;background:linear-gradient(150deg,rgba(31,232,216,.10),rgba(13,4,40,.35));border:1px solid var(--cyan-line);border-radius:24px;padding:clamp(34px,5vw,60px)}
+.evo .evo-bg{position:absolute;inset:0;z-index:0}
+.evo .evo-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(.6) brightness(.5) contrast(1.05)}
+.evo .evo-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(40,12,100,.92),rgba(40,12,100,.55))}
+.evo>*:not(.evo-bg){position:relative;z-index:1}
+.evo .badge{display:inline-flex;align-items:center;gap:10px;font-family:'Poppins';font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--cyan);margin-bottom:24px;border:1px solid var(--cyan-line);padding:8px 16px;border-radius:100px}
+.evo blockquote{font-family:'Poppins';font-weight:500;font-size:clamp(1.3rem,2.6vw,2.1rem);line-height:1.35;letter-spacing:-.01em;max-width:26ch}
+.evo .sign{margin-top:26px;color:var(--w-65);font-size:.98rem;max-width:640px}
+.evo .evo-stats{display:flex;flex-wrap:wrap;gap:14px 50px;margin-top:34px}
+.evo .evo-stats .v{font-family:'Poppins';font-weight:700;font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--cyan);line-height:1}
+.evo .evo-stats .l{font-family:'Poppins';font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--w-65);margin-top:6px}
+
+/* ============ TIMELINE ============ */
+.tl{position:relative;margin-top:40px;display:flex;flex-direction:column;gap:0}
+.tl::before{content:'';position:absolute;left:19px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--cyan-line),rgba(31,232,216,.05))}
+.tl-item{position:relative;padding:0 0 36px 64px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item .dot{position:absolute;left:8px;top:2px;width:24px;height:24px;border-radius:50%;background:var(--violet-700);border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center}
+.tl-item .dot::after{content:'';width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.tl-item .ph{font-family:'Poppins';font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:4px}
+.tl-item h3{font-family:'Poppins';font-weight:600;font-size:1.2rem;margin-bottom:8px}
+.tl-item p{color:var(--w-65);font-size:.95rem;line-height:1.6;max-width:62ch}
+
+/* ============ FASES (validar/optimizar/escalar) ============ */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
+.phase-card{position:relative;border:1px solid var(--line-soft);border-radius:20px;padding:32px 28px;background:var(--card);overflow:hidden;transition:all .4s var(--ease)}
+.phase-card:hover{transform:translateY(-6px);border-color:var(--cyan-line)}
+.phase-card .pn{font-family:'Poppins';font-weight:700;font-size:3rem;color:rgba(31,232,216,.18);line-height:1;position:absolute;top:18px;right:24px}
+.phase-card h3{font-family:'Poppins';font-weight:600;font-size:1.4rem;margin-bottom:12px}
+.phase-card .gp{font-family:'Poppins';font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;display:block}
+.phase-card p{color:var(--w-65);font-size:.95rem;line-height:1.6}
+.phase-card.hi{background:linear-gradient(160deg,rgba(31,232,216,.14),rgba(13,4,40,.35));border-color:var(--cyan-line)}
+
+/* ============ FOTOGRAFÍA ============ */
+.photo,.media{position:relative;overflow:hidden;border-radius:22px;border:1px solid var(--line-soft)}
+.media{aspect-ratio:4/3}
+.media.wide{aspect-ratio:16/9}
+.media.tall{aspect-ratio:3/4}
+.photo img,.media img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.82) contrast(1.06) brightness(.93)}
+.media::after,.photo::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(155deg,rgba(74,18,168,.48),rgba(18,5,40,.26) 55%,rgba(31,232,216,.12))}
+.media .cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:32px}
+
+/* fondos full-bleed */
+.bg-photo{position:absolute;inset:0;z-index:0;overflow:hidden}
+.bg-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.6) contrast(1.05)}
+.bg-photo.hero img{object-position:62% center}
+.bg-photo.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(63,15,149,.97) 26%,rgba(74,18,168,.62) 60%,rgba(31,232,216,.10))}
+.bg-photo.center::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 42%,rgba(74,18,168,.74),rgba(18,5,40,.95))}
+
+/* filas a dos columnas con imagen */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.split.rev>.col-img{order:-1}
+
+/* logo wall clientes (tiles blancos · admite logos reales) */
+.logowall{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:46px}
+.logocell{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;
+  min-height:120px;border:1px solid rgba(255,255,255,.55);border-radius:16px;background:#fff;
+  padding:22px 22px;transition:all .4s var(--ease)
+}
+.logocell:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(13,4,40,.35)}
+.logocell .brandlogo{max-height:58px;max-width:84%;width:auto;object-fit:contain;display:block}
+.logocell .brandlogo.lg{max-height:72px;max-width:94%}
+.logocell .ln{display:none;font-family:'Poppins';font-weight:700;font-size:1.02rem;letter-spacing:-.01em;line-height:1.18;color:var(--violet-700)}
+.logocell .lk{display:none;font-family:'Poppins';font-weight:600;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#9784b5}
+.logocell.noimg .ln,.logocell.noimg .lk{display:block}
+
+/* ============ CTA / CIERRE ============ */
+#cierre{text-align:center;align-items:center}
+#cierre .wrap{display:flex;flex-direction:column;align-items:center}
+.close-title{font-family:'Poppins';font-weight:700;font-size:clamp(2rem,5vw,4rem);line-height:1.08;letter-spacing:-.02em;max-width:22ch}
+.close-sign{margin-top:46px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.close-tag{font-family:'Poppins';font-weight:500;color:var(--cyan);letter-spacing:.04em;font-size:1.05rem;margin-top:6px}
+.cta-go{display:inline-flex;align-items:center;gap:12px;margin-top:40px;padding:18px 44px;border-radius:100px;font-family:'Poppins';font-weight:700;font-size:1.05rem;letter-spacing:.01em;color:var(--ink);background:linear-gradient(95deg,var(--cyan),var(--cyan-bright));text-decoration:none;box-shadow:0 12px 36px rgba(31,232,216,.32);transition:transform .25s ease,box-shadow .25s ease}
+.cta-go:hover{transform:translateY(-3px);box-shadow:0 18px 48px rgba(31,232,216,.45)}
+.cta-go svg{width:20px;height:20px}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:900px){
+  .split{grid-template-columns:1fr;gap:28px}
+  .split.rev>.col-img{order:0}
+  .dots{display:none}
+  section{padding:104px 22px 84px}
+  .sfoot{left:22px;right:22px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .flowline{grid-template-columns:1fr;gap:24px}
+  .flowline .step::after{display:none}
+  .multiplier{grid-template-columns:1fr;gap:28px}
+  .outputs{grid-template-columns:repeat(2,1fr)}
+  .invest,.landing{grid-template-columns:1fr;gap:30px}
+  .phases{grid-template-columns:1fr}
+  .scope{grid-template-columns:1fr}
+  .logowall{grid-template-columns:repeat(2,1fr)}
+  .pipe .arrow{transform:rotate(90deg)}
+  .topbar{padding:16px 22px}
+  .topbar .brand-tag{display:none}
+}
+@media(max-width:560px){
+  .outputs{grid-template-columns:1fr 1fr}
+  .wf-kpis{grid-template-columns:repeat(2,1fr)}
+  .stats{gap:20px 32px}
+}
+</style>
+</head>
+<body>
+
+<!-- PROGRESO -->
+<div class="progress" id="prog"></div>
+
+<!-- HEADER -->
+<header class="topbar" id="topbar">
+  <div class="brand-tag"><span class="dot"></span>Propuesta estratégica · Access One Argentina</div>
+  <div class="logo">
+    <img class="logo-pic" src="img/logo-blanco.png" alt="Popcorn">
+  </div>
+</header>
+
+<!-- NAV LATERAL -->
+<nav class="dots" id="dots"></nav>
+
+<!-- ============ 1 · PORTADA ============ -->
+<section id="hero" data-label="Inicio">
+  <div class="bg-photo hero"><img src="img/hero.jpg" alt="Medicina internacional de excelencia" loading="eager"></div>
+  <div class="hero-orbits"><div></div><div></div><div></div><div class="core"></div></div>
+  <div class="wrap">
+    <div class="eyebrow hero-eyebrow r">Access One × Popcorn · Adquisición digital · Argentina 2026</div>
+    <h1 class="hero-title r d1">Validar antes<br>de <span class="cy">escalar.</span></h1>
+    <p class="hero-sub r d3">Antes de invertir fuerte, hay que entender qué funciona. Una hoja de ruta para construir, medir y optimizar el modelo de adquisición digital de Access One en Argentina —y recién después, acelerar.</p>
+    <div class="hero-tags r d4">
+      <span class="tag">Generación de demanda</span>
+      <span class="tag">Performance Marketing</span>
+      <span class="tag">Optimización de embudos</span>
+      <span class="tag">Marketing de salud</span>
+      <span class="tag">Datos &amp; escalamiento</span>
+    </div>
+  </div>
+  <div class="scrollcue"><div class="mouse"></div>Desliz&aacute; para comenzar</div>
+</section>
+
+<!-- ============ 2 · PRESENTACIÓN POPCORN ============ -->
+<section id="popcorn" data-label="Quiénes somos">
+  <div class="wrap">
+    <div class="eyebrow r">Quiénes somos</div>
+    <h2 class="h-lg r d1">No vendemos pauta.<br>Construimos <span class="cy">modelos de crecimiento.</span></h2>
+    <p class="lead r d2" style="margin-top:24px">Popcorn es una agencia de marketing, comunicación y creatividad que trabaja desde una mirada de negocio. Para Access One no proponemos administrar anuncios: proponemos diseñar, validar y escalar el sistema completo de adquisición digital —desde la propuesta de valor hasta la venta.</p>
+
+    <div class="grid g3 r d3" style="margin-top:50px">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3>Mirada de negocio</h3>
+        <p>Empezamos por el objetivo comercial —cápitas, CAC, ROI— y desde ahí definimos las acciones. Nunca al revés.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Especialistas en salud</h3>
+        <p>Años trabajando con instituciones médicas. Entendemos pacientes, derivantes, productos intangibles y decisiones de alta consideración.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Orientación a resultados</h3>
+        <p>Performance, datos y optimización continua. Medimos lo que importa y ajustamos hasta que el modelo sea rentable.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Popcorn · Marketing, Comunicación &amp; Performance</span><span class="num">01 — Popcorn</span></div>
+</section>
+
+<!-- ============ 3 · CREDENCIALES SALUD ============ -->
+<section id="credenciales" data-label="Experiencia en salud">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow r">Credenciales · Salud</div>
+        <h2 class="h-lg r d1">Hablamos el idioma de la <span class="cy">salud.</span></h2>
+        <p class="lead r d2" style="margin-top:22px">Trabajamos con hospitales, centros médicos, laboratorios y empresas de medicina del país. Sabemos cómo se comunica un servicio que no se ve, que se decide con miedo y confianza, y que vale por el respaldo que hay detrás.</p>
+        <div class="stats sm r d3">
+          <div class="stat"><div class="v">+30</div><div class="l">Instituciones de salud acompañadas</div></div>
+          <div class="stat"><div class="v">Intangibles</div><div class="l">Productos de ticket medio y alto</div></div>
+          <div class="stat"><div class="v">B2B + B2C</div><div class="l">Decisiones complejas y consultivas</div></div>
+        </div>
+      </div>
+      <div class="col-img r d2"><div class="media tall"><img src="img/medicina.jpg" alt="Medicina de excelencia y diagnóstico de alta complejidad" style="object-position:center 30%"><div class="cap"><div class="quote" style="font-size:1.1rem">Entendemos los productos de salud de alto valor percibido: los que se eligen por respaldo, no por precio.</div></div></div></div>
+    </div>
+
+    <div class="grid g4 r d4" style="margin-top:50px">
+      <div class="card">
+        <span class="num-tag">01</span>
+        <h3>Decisiones complejas</h3>
+        <p>Procesos de decisión largos, racionales y emocionales a la vez.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">02</span>
+        <h3>Servicios intangibles</h3>
+        <p>Comunicar valor sin un producto físico que mostrar.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">03</span>
+        <h3>Ticket medio y alto</h3>
+        <p>Embudos de consideración, no de impulso.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">04</span>
+        <h3>Marketing + ventas</h3>
+        <p>Integramos la generación de demanda con el cierre comercial.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Marketing de salud · productos de alto valor percibido</span><span class="num">02 — Credenciales</span></div>
+</section>
+
+<!-- ============ 4 · LOGOS CLIENTES SALUD ============ -->
+<section id="clientes" data-label="Clientes de salud">
+  <div class="wrap">
+    <div class="eyebrow r">Confían en nosotros</div>
+    <h2 class="h-lg r d1">Instituciones que ya nos <span class="cy">eligieron.</span></h2>
+    <p class="lead r d2" style="margin-top:20px">Algunas de las organizaciones de salud con las que trabajamos.</p>
+
+    <div class="logowall r d3">
+      <div class="logocell"><img class="brandlogo" src="img/logos/austral.png" alt="Hospital Universitario Austral" onerror="this.closest('.logocell').classList.add('noimg');this.remove()"><span class="ln">Hospital Universitario Austral</span><span class="lk">Salud · Alta complejidad</span></div>
+      <div class="logocell"><img class="brandlogo" src="img/logos/fleni.webp" alt="FLENI" onerror="this.closest('.logocell').classList.add('noimg');this.remove()"><span class="ln">FLENI</span><span class="lk">Neurología</span></div>
+      <div class="logocell"><img class="brandlogo lg" src="img/logos/fleming.png" alt="Instituto Alexander Fleming" onerror="this.closest('.logocell').classList.add('noimg');this.remove()"><span class="ln">Instituto Alexander Fleming</span><span class="lk">Oncología</span></div>
+      <div class="logocell"><img class="brandlogo" src="img/logos/swiss.webp" alt="Swiss Medical" onerror="this.closest('.logocell').classList.add('noimg');this.remove()"><span class="ln">Swiss Medical</span><span class="lk">Medicina prepaga</span></div>
+      <div class="logocell"><img class="brandlogo" src="img/logos/cetac.jpg" alt="CETAC Juncal" onerror="this.closest('.logocell').classList.add('noimg');this.remove()"><span class="ln">CETAC Juncal</span><span class="lk">Diagnóstico &amp; tratamiento</span></div>
+      <div class="logocell"><img class="brandlogo lg" src="img/logos/manlab.png" alt="ManLab" onerror="this.closest('.logocell').classList.add('noimg');this.remove()"><span class="ln">ManLab</span><span class="lk">Laboratorio</span></div>
+      <div class="logocell"><img class="brandlogo" src="img/logos/centralab.png" alt="CentraLab" onerror="this.closest('.logocell').classList.add('noimg');this.remove()"><span class="ln">CentraLab</span><span class="lk">Laboratorio</span></div>
+      <div class="logocell"><img class="brandlogo" src="img/logos/fitzroy.jpg" alt="CMI Fitz Roy" onerror="this.closest('.logocell').classList.add('noimg');this.remove()"><span class="ln">CMI Fitz Roy</span><span class="lk">Medicina laboral</span></div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Experiencia comprobada en el sector salud</span><span class="num">03 — Clientes</span></div>
+</section>
+
+<!-- ============ 5 · COMPRENSIÓN DEL DESAFÍO ============ -->
+<section id="desafio" data-label="El desafío">
+  <div class="wrap">
+    <div class="split rev" style="margin-bottom:46px">
+      <div class="col-img r d2"><div class="media"><img src="img/comprension.jpg" alt="Comprensión estratégica del desafío"></div></div>
+      <div>
+        <div class="eyebrow r">Lo que entendimos</div>
+        <h2 class="h-lg r d1" style="max-width:18ch">Un producto excelente, un mercado <span class="cy">por descubrir.</span></h2>
+        <p class="lead r d2" style="margin-top:22px">Access One ofrece acceso a la mejor medicina del mundo como complemento de las coberturas premium locales. El producto es sólido. El desafío no es el producto: es construir, desde cero, el canal que lo lleve al mercado argentino.</p>
+      </div>
+    </div>
+
+    <div class="grid g4 r d3">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg></div>
+        <h3>Sin histórico</h3>
+        <p>No hay campañas previas en Argentina sobre las cuales optimizar.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Mercado no validado</h3>
+        <p>Aún no sabemos qué mensaje, audiencia y canal rinden mejor.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <h3>Producto intangible</h3>
+        <p>Se vende respaldo y tranquilidad: alta consideración, ciclo largo.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Aprender, no solo vender</h3>
+        <p>El objetivo de los primeros meses es entender antes de invertir fuerte.</p>
+      </div>
+    </div>
+
+    <p class="r d4" style="margin-top:34px"><span class="note-pill"><b>Contexto</b> · InnovAr LATAM lidera el desarrollo comercial del mercado argentino. Popcorn aporta estrategia, performance y optimización.</span></p>
+  </div>
+  <div class="sfoot"><span>El producto está. Falta construir el canal.</span><span class="num">04 — El desafío</span></div>
+</section>
+
+<!-- ============ 6 · VALIDAR ANTES DE ESCALAR (TESIS) ============ -->
+<section id="tesis" data-label="Validar antes de escalar">
+  <div class="wrap">
+    <div class="eyebrow r">Nuestra tesis</div>
+    <h2 class="h-lg r d1" style="max-width:20ch">El objetivo inicial no es generar leads.<br>Es descubrir el <span class="cy">modelo.</span></h2>
+    <p class="lead r d2" style="margin-top:22px">Lanzar fuerte sobre un mercado sin validar quema presupuesto. Por eso proponemos un camino en tres tiempos: primero descubrimos qué funciona, luego lo afinamos, y solo entonces escalamos con confianza sobre lo que ya demostró ser rentable.</p>
+
+    <div class="phases r d3">
+      <div class="phase-card">
+        <span class="pn">01</span>
+        <span class="gp">Aprender</span>
+        <h3>Validar</h3>
+        <p>Probar propuestas de valor, mensajes, audiencias y canales con un presupuesto controlado. Encontrar las combinaciones que generan leads de calidad.</p>
+      </div>
+      <div class="phase-card hi">
+        <span class="pn">02</span>
+        <span class="gp">Afinar</span>
+        <h3>Optimizar</h3>
+        <p>Mejorar el embudo punta a punta: CRO, segmentación, creatividades y nurturing. Bajar el CPL y el CAC sin perder calidad de lead.</p>
+      </div>
+      <div class="phase-card">
+        <span class="pn">03</span>
+        <span class="gp">Acelerar</span>
+        <h3>Escalar</h3>
+        <p>Aumentar la inversión solo sobre los segmentos y canales que ya probaron rentabilidad. Crecer sobre certezas, no sobre supuestos.</p>
+      </div>
+    </div>
+
+    <div class="split rev" style="margin-top:60px">
+      <div class="col-img r d2"><div class="media wide"><img src="img/metodologia.jpg" alt="Un camino por etapas"></div></div>
+      <div class="r d3">
+        <h3 class="h-md" style="margin-bottom:16px">Por qué este orden importa</h3>
+        <p class="muted" style="font-size:1.05rem;line-height:1.7">Cada peso invertido en los primeros 60-90 días compra <b>aprendizaje</b>: datos que vuelven previsible al canal. Cuando escalamos, ya no apostamos: amplificamos lo que sabemos que convierte. Así se construye un modelo de adquisición rentable y sostenible.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Validar → Optimizar → Escalar</span><span class="num">05 — La tesis</span></div>
+</section>
+
+<!-- ============ 7 · OPORTUNIDAD DE MERCADO ============ -->
+<section id="oportunidad" data-label="Oportunidad de mercado">
+  <div class="wrap">
+    <div class="split" style="margin-bottom:50px">
+      <div>
+        <div class="eyebrow r">Oportunidad detectada</div>
+        <h2 class="h-lg r d1" style="max-width:18ch">El ABC1 busca <span class="cy">respaldo</span> para lo que no se puede improvisar.</h2>
+        <p class="lead r d2" style="margin-top:22px">Crece la demanda de soluciones de salud premium y la preocupación por el acceso a tratamientos de alta complejidad. Cada vez más familias y ejecutivos buscan complementar su cobertura con un respaldo internacional. No hablamos desde el miedo: hablamos desde la prevención, la tranquilidad y la libertad de elegir.</p>
+      </div>
+      <div class="col-img r d2"><div class="media tall"><img src="img/familia.jpg" alt="Una familia con el respaldo de su salud asegurado" style="object-position:center 35%"></div></div>
+    </div>
+
+    <div class="grid g4 r d3">
+      <div class="card">
+        <span class="num-tag">Demanda</span>
+        <h3>Premium en alza</h3>
+        <p>Más interés por coberturas que aseguren acceso, no solo descuentos.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Acceso</span>
+        <h3>Alta complejidad</h3>
+        <p>Preocupación creciente por tratamientos que no siempre están disponibles localmente.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Complemento</span>
+        <h3>No compite, suma</h3>
+        <p>Se posiciona junto a OSDE, Swiss Medical, Omint o Medifé, no contra ellas.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Emoción</span>
+        <h3>Tranquilidad</h3>
+        <p>El driver es la previsión y la paz mental para la familia, no la urgencia.</p>
+      </div>
+    </div>
+
+    <div class="evo r d4" style="margin-top:50px">
+      <div class="evo-bg"><img src="img/global.jpg" alt="Red médica global"></div>
+      <div class="badge"><span style="width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)"></span>Un diferencial difícil de igualar</div>
+      <blockquote class="r d1">Access One abre la puerta a la mejor medicina del mundo. Ese es el activo que vamos a comunicar.</blockquote>
+      <div class="evo-stats r d2">
+        <div><div class="v">560</div><div class="l">Centros de excelencia</div></div>
+        <div><div class="v">6.100</div><div class="l">Hospitales y clínicas</div></div>
+        <div><div class="v">+1,1 M</div><div class="l">Profesionales de la salud</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Prevención · tranquilidad · acceso · libertad de elección</span><span class="num">06 — Oportunidad</span></div>
+</section>
+
+<!-- ============ 8 · RIESGOS Y DESAFÍOS ============ -->
+<section id="riesgos" data-label="Riesgos y desafíos">
+  <div class="wrap">
+    <div class="eyebrow r">Lo decimos de frente</div>
+    <h2 class="h-lg r d1">Riesgos del proyecto, y cómo los <span class="cy">gestionamos.</span></h2>
+    <p class="lead r d2" style="margin-top:20px">Un partner estratégico no esconde los riesgos: los anticipa. Estos son los principales desafíos y nuestro plan para mitigarlos desde el día uno.</p>
+
+    <div class="grid g2 r d3" style="margin-top:48px">
+      <div class="card">
+        <span class="num-tag">Riesgo 01 · Sin histórico</span>
+        <h3>Empezamos sin datos</h3>
+        <p><b>Mitigación:</b> fase de validación con presupuesto controlado y un framework de testing estructurado, para generar aprendizaje rápido y barato antes de comprometer inversión.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Riesgo 02 · Ciclo de decisión</span>
+        <h3>El producto es de alta consideración</h3>
+        <p><b>Mitigación:</b> embudo multi-etapa con contenidos de nurturing y la segunda opinión médica como puerta de entrada de bajo compromiso.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Riesgo 03 · Calidad vs. volumen</span>
+        <h3>Leads que no califican</h3>
+        <p><b>Mitigación:</b> definición de lead scoring junto al equipo comercial y optimización al CAC y a la venta, no solo al CPL.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Riesgo 04 · Atribución</span>
+        <h3>No saber qué funciona</h3>
+        <p><b>Mitigación:</b> setup de medición y tracking desde el inicio, con eventos de conversión claros y trazabilidad de punta a punta.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Riesgo 05 · Mensaje local</span>
+        <h3>Comunicación no adaptada</h3>
+        <p><b>Mitigación:</b> testing de propuestas de valor y mensajes pensados para el mercado argentino, no traducciones de otros mercados.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Riesgo 06 · Marketing &amp; ventas</span>
+        <h3>El lead se enfría</h3>
+        <p><b>Mitigación:</b> integración con ventas, feedback loop continuo y acuerdos de tiempos de seguimiento de cada lead generado.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Anticipar el riesgo es parte de la estrategia</span><span class="num">07 — Riesgos</span></div>
+</section>
+
+<!-- ============ 9 · METODOLOGÍA ============ -->
+<section id="metodologia" data-label="Metodología">
+  <div class="wrap">
+    <div class="eyebrow r">Cómo trabajamos</div>
+    <h2 class="h-lg r d1">Una metodología en <span class="cy">cuatro etapas.</span></h2>
+    <p class="lead r d2" style="margin-top:20px">Cada etapa tiene un objetivo claro y alimenta a la siguiente. Del descubrimiento inicial hasta el escalamiento basado en datos.</p>
+
+    <div class="pipe r d3" style="margin-top:50px">
+      <div class="node"><span class="k">Etapa 1</span><span class="t">Discovery</span><p>Investigación, audiencias, mensajes, propuesta de valor y funnel</p></div>
+      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="node"><span class="k">Etapa 2</span><span class="t">Implementación</span><p>Meta, Google y LinkedIn Ads · landing · tracking</p></div>
+      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="node"><span class="k">Etapa 3</span><span class="t">Optimización</span><p>Testing, CRO, ajuste de audiencias y mensajes</p></div>
+      <div class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="node"><span class="k">Etapa 4</span><span class="t">Escalamiento</span><p>Segmentos rentables · más inversión · más canales</p></div>
+    </div>
+
+    <div class="grid g4 r d4" style="margin-top:50px">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Discovery y validación</h3>
+        <p>Investigación inicial, definición de públicos, mensajes y propuesta de valor. Diseño del embudo comercial.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2-7-8-3z" fill="currentColor" stroke="none"/></svg></div>
+        <h3>Implementación</h3>
+        <p>Puesta en marcha de campañas en Meta, Google y LinkedIn. Arquitectura de landing y configuración del tracking.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+        <h3>Optimización</h3>
+        <p>Testing continuo de audiencias, mensajes y creatividades. CRO sobre la landing para mejorar la conversión.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg></div>
+        <h3>Escalamiento</h3>
+        <p>Identificación de los segmentos más rentables, incremento gradual de inversión y expansión de canales.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Discovery → Implementación → Optimización → Escalamiento</span><span class="num">08 — Metodología</span></div>
+</section>
+
+<!-- ============ 10 · ROADMAP ============ -->
+<section id="roadmap" data-label="Roadmap">
+  <div class="wrap">
+    <div class="eyebrow r">Roadmap de implementación</div>
+    <h2 class="h-lg r d1">Los primeros <span class="cy">90 días</span>, y el camino al año 1.</h2>
+    <p class="lead r d2" style="margin-top:20px">Esperamos un período de aprendizaje de 60 a 90 días antes de alcanzar indicadores estables. Este es el plan para llegar ahí con orden.</p>
+
+    <div class="tl r d3">
+      <div class="tl-item">
+        <div class="dot"></div>
+        <div class="ph">Días 0 – 15 · Setup</div>
+        <h3>Discovery y cimientos</h3>
+        <p>Investigación de mercado y audiencias, definición de propuesta de valor y mensajes, diseño del embudo, arquitectura y copy de la landing, e instalación completa del tracking y la medición.</p>
+      </div>
+      <div class="tl-item">
+        <div class="dot"></div>
+        <div class="ph">Días 15 – 30 · Lanzamiento</div>
+        <h3>Salida a mercado y primeros tests</h3>
+        <p>Activación de campañas en Meta, Google y LinkedIn con múltiples variantes de audiencias, mensajes y creatividades. Comienza la recolección de datos reales.</p>
+      </div>
+      <div class="tl-item">
+        <div class="dot"></div>
+        <div class="ph">Días 30 – 60 · Optimización</div>
+        <h3>Lectura y ajuste</h3>
+        <p>Identificación de las combinaciones que mejor rinden, primeras acciones de CRO sobre la landing y depuración de audiencias. El CPL empieza a estabilizarse.</p>
+      </div>
+      <div class="tl-item">
+        <div class="dot"></div>
+        <div class="ph">Días 60 – 90 · Validación</div>
+        <h3>Indicadores estables</h3>
+        <p>El modelo muestra patrones claros: qué segmentos convierten, a qué costo y con qué calidad de lead. Definimos la base sobre la cual es seguro escalar.</p>
+      </div>
+      <div class="tl-item">
+        <div class="dot"></div>
+        <div class="ph">Mes 3 → 12 · Escalamiento</div>
+        <h3>Crecer hacia las 160–180 cápitas</h3>
+        <p>Incremento progresivo de inversión sobre los segmentos rentables y expansión de canales, con el objetivo de construir un flujo sostenido de nuevas cápitas a lo largo del primer año.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>De la validación al escalamiento sostenido</span><span class="num">09 — Roadmap</span></div>
+</section>
+
+<!-- ============ 11 · ALCANCE ============ -->
+<section id="alcance" data-label="Alcance">
+  <div class="wrap">
+    <div class="eyebrow r">Alcance detallado</div>
+    <h2 class="h-lg r d1">Qué aporta <span class="cy">Popcorn.</span></h2>
+    <p class="lead r d2" style="margin-top:20px">Roles claros: Popcorn aporta estrategia, performance y optimización. El equipo interno de Access One aporta diseño, producción y desarrollo. Sin superposiciones.</p>
+
+    <div class="scope r d3" style="margin-top:48px">
+      <div class="scope-col yes">
+        <h3>Lo que hacemos nosotros</h3>
+        <p class="sub">Estrategia · Performance · Optimización</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Estrategia de adquisición y generación de demanda</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Gestión de campañas en Meta, Google y LinkedIn Ads</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Testing de audiencias, mensajes y propuestas de valor</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Diseño del embudo de conversión y automatizaciones</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Arquitectura, estructura, copy estratégico y CRO de la landing</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Setup de tracking, medición y trazabilidad</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Dashboards y reporting orientado a negocio</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Integración entre marketing y ventas</li>
+        </ul>
+      </div>
+      <div class="scope-col no">
+        <h3>Lo que aporta Access One</h3>
+        <p class="sub">Equipo interno ya disponible</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>Diseño gráfico y producción de piezas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>Producción audiovisual</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>Desarrollo técnico de las landing pages</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>Community management y redes orgánicas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>Calendarios de contenido orgánico tradicional</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>Cobertura de eventos</li>
+        </ul>
+        <p style="margin-top:22px;font-size:.9rem;color:var(--w-45);line-height:1.6">Popcorn entrega los lineamientos estratégicos (briefs, estructura y copy) para que el equipo interno ejecute la producción con foco en conversión.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Roles claros, sin superposiciones</span><span class="num">10 — Alcance</span></div>
+</section>
+
+<!-- ============ 12 · KPIs ============ -->
+<section id="kpis" data-label="KPIs">
+  <div class="wrap">
+    <div class="eyebrow r">Cómo medimos el éxito</div>
+    <h2 class="h-lg r d1">Los <span class="cy">indicadores</span> que importan.</h2>
+    <p class="lead r d2" style="margin-top:20px">No medimos vanidad. Medimos el negocio: cuánto cuesta conseguir un cliente, qué calidad tiene y cuánto retorna la inversión.</p>
+
+    <div class="grid g3 r d3" style="margin-top:48px">
+      <div class="card">
+        <span class="num-tag">CPL</span>
+        <h3>Costo por lead</h3>
+        <p>Cuánto cuesta generar cada contacto interesado. El primer termómetro de eficiencia.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">CAC</span>
+        <h3>Costo de adquisición</h3>
+        <p>Cuánto cuesta convertir un lead en una cápita real. El indicador que guía el escalamiento.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Calidad</span>
+        <h3>Calidad de leads</h3>
+        <p>Qué porcentaje de leads califica y avanza. Optimizamos a calidad, no solo a volumen.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Conversión</span>
+        <h3>Tasa de conversión</h3>
+        <p>De clic a lead, y de lead a venta. La salud del embudo en cada etapa.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">Ventas</span>
+        <h3>Cápitas generadas</h3>
+        <p>El resultado de negocio: nuevas cápitas atribuibles al canal digital.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">ROI</span>
+        <h3>Retorno de inversión</h3>
+        <p>La relación entre lo invertido y lo generado. El número que valida el modelo.</p>
+      </div>
+    </div>
+
+    <p class="r d4" style="margin-top:34px"><span class="note-pill"><b>Meta año 1</b> · 160–180 nuevas cápitas · ticket estimado USD 40–50 / mes por cápita</span></p>
+  </div>
+  <div class="sfoot"><span>Optimizamos al CAC y a la venta, no a la vanidad</span><span class="num">11 — KPIs</span></div>
+</section>
+
+<!-- ============ 13 · MODELO DE REPORTING ============ -->
+<section id="reporting" data-label="Reporting">
+  <div class="wrap">
+    <div class="eyebrow r">Modelo de reporting</div>
+    <h2 class="h-lg r d1">Datos claros, decisiones <span class="cy">claras.</span></h2>
+    <div class="landing r d2" style="margin-top:46px">
+      <div class="wf scale-in">
+        <div class="wf-bar"><span></span><span></span><span></span><span class="wf-ttl">Dashboard · Access One Argentina</span></div>
+        <div class="wf-kpis">
+          <div class="wf-kpi"><div class="kk">Leads</div><div class="kv">000</div></div>
+          <div class="wf-kpi"><div class="kk">CPL</div><div class="kv">USD 0</div></div>
+          <div class="wf-kpi"><div class="kk">CAC</div><div class="kv">USD 0</div></div>
+          <div class="wf-kpi"><div class="kk">ROI</div><div class="kv">0x</div></div>
+        </div>
+        <div class="wf-chart"><i style="height:38%"></i><i style="height:55%"></i><i style="height:46%"></i><i style="height:68%"></i><i style="height:60%"></i><i style="height:82%"></i><i style="height:74%"></i><i style="height:95%"></i></div>
+        <div class="wf-row" style="height:14px;width:70%"></div>
+        <div class="wf-row" style="height:14px;width:52%"></div>
+      </div>
+      <div>
+        <p class="lead" style="margin-bottom:24px">Un tablero vivo, no un PDF que llega tarde. Acceso permanente al estado del canal, con lectura de negocio y no solo de métricas de plataforma.</p>
+        <ul class="lp-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><b>Reporte semanal operativo</b> · qué se probó, qué rindió y qué se ajusta</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><b>Reporte mensual de negocio</b> · CPL, CAC, calidad, ventas y ROI</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><b>Aprendizajes</b> · qué descubrimos del mercado y qué decisión recomienda cada dato</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><b>Próximos pasos</b> · plan de acción para el período siguiente</li>
+        </ul>
+        <span class="note-pill"><b>Transparencia total</b> · cada decisión se respalda con datos</span>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Un dashboard vivo, con lectura de negocio</span><span class="num">12 — Reporting</span></div>
+</section>
+
+<!-- ============ 14 · EQUIPO ============ -->
+<section id="equipo" data-label="Equipo">
+  <div class="wrap">
+    <div class="split rev" style="margin-bottom:48px">
+      <div class="col-img r d2"><div class="media"><img src="img/equipo.jpg" alt="Equipo de Popcorn orientado a resultados"></div></div>
+      <div>
+        <div class="eyebrow r">El equipo</div>
+        <h2 class="h-lg r d1">Un equipo <span class="cy">senior</span> a cargo.</h2>
+        <p class="lead r d2" style="margin-top:22px">No un ejecutor de tareas: un equipo de dirección que piensa el negocio de Access One como propio, con roles definidos y responsabilidad de extremo a extremo.</p>
+      </div>
+    </div>
+
+    <div class="grid g4 r d3">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
+        <h3>Dirección estratégica</h3>
+        <p>Visión de negocio, definición de objetivos, prioridades y dueño del proyecto de extremo a extremo.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2-7-8-3z" fill="currentColor" stroke="none"/></svg></div>
+        <h3>Paid Media &amp; Performance</h3>
+        <p>Estrategia y gestión de campañas en Meta, Google y LinkedIn, con optimización continua.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3>Analítica &amp; Datos</h3>
+        <p>Medición, tracking, dashboards y lectura de resultados para decidir con evidencia.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h3>UX &amp; Conversión</h3>
+        <p>Arquitectura de landing, copy estratégico y CRO junto al equipo técnico de Access One.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Quien lidera es dueño del proyecto de extremo a extremo</span><span class="num">13 — Equipo</span></div>
+</section>
+
+<!-- ============ 15 · INVERSIÓN ============ -->
+<section id="inversion" data-label="Inversión">
+  <div class="wrap">
+    <div class="eyebrow r">Inversión</div>
+    <h2 class="h-lg r d1">Una inversión en <span class="cy">aprendizaje</span> y crecimiento.</h2>
+    <p class="lead r d2" style="margin-top:20px">No es un gasto en pauta: es la construcción de un activo de negocio —un canal de adquisición propio, medible y escalable.</p>
+
+    <div class="invest r d3" style="margin-top:50px">
+      <div class="invest-card scale-in">
+        <span class="per">Estructura de inversión</span>
+        <div class="price-row">
+          <div class="pl">Discovery &amp; setup inicial<small>Investigación, embudo, arquitectura de landing y tracking · pago único</small></div>
+          <div class="pv">USD 0</div>
+        </div>
+        <div class="price-row">
+          <div class="pl">Fee mensual de gestión<small>Estrategia, performance, optimización y reporting</small></div>
+          <div class="pv">USD 0</div>
+        </div>
+        <div class="price-row">
+          <div class="pl">Acompañamiento estratégico mensual<small>Consultoría y dirección estratégica · 15 hs/mes</small></div>
+          <div class="pv">USD 0</div>
+        </div>
+        <div class="price-row">
+          <div class="pl">Inversión en medios (pauta)<small>La abona Access One directamente · Popcorn analiza y recomienda la mejor estrategia de inversión</small></div>
+          <div class="pv">A definir</div>
+        </div>
+        <div class="price-row">
+          <div class="pl">Desarrollo / CRO de landing<small>Opcional · se cotiza por separado</small></div>
+          <div class="pv">USD 0</div>
+        </div>
+      </div>
+      <ul class="bullets">
+        <li><span class="bi">1</span><p><b>Modelo por etapas.</b> Arrancamos con un presupuesto de validación controlado y escalamos la inversión solo sobre lo que demuestra rentabilidad.</p></li>
+        <li><span class="bi">2</span><p><b>Inversión que rinde doble.</b> En los primeros meses cada peso compra ventas y, sobre todo, aprendizaje que vuelve previsible al canal.</p></li>
+        <li><span class="bi">3</span><p><b>Transparencia total.</b> La inversión en medios es gestionada y reportada por separado del fee de Popcorn.</p></li>
+        <li><span class="bi">4</span><p><b>Foco en el retorno.</b> El objetivo no es gastar más, sino construir un CAC sano que permita escalar con confianza.</p></li>
+      </ul>
+    </div>
+    <p class="r d4" style="margin-top:30px"><span class="note-pill"><b>Valores a completar</b> · esta estructura queda lista para definir los montos finales en USD</span></p>
+  </div>
+  <div class="sfoot"><span>Construir un activo, no comprar clics</span><span class="num">14 — Inversión</span></div>
+</section>
+
+<!-- ============ 16 · CIERRE COMERCIAL ============ -->
+<section id="cierre" data-label="Cierre">
+  <div class="bg-photo center"><img src="img/cierre.jpg" alt="Acceso a la mejor medicina del mundo"></div>
+  <div class="hero-orbits" style="left:-200px;right:auto"><div></div><div></div><div></div><div class="core"></div></div>
+  <div class="wrap">
+    <div class="eyebrow r" style="justify-content:center">Próximos pasos</div>
+    <h2 class="close-title r d1">No proponemos pauta.<br>Proponemos construir el <span class="cy">modelo</span><br>de adquisición de Access One en Argentina.</h2>
+    <p class="lead r d2" style="margin:28px auto 0;text-align:center">Validar antes de escalar. Aprender qué funciona, optimizarlo y crecer sobre certezas. Estamos listos para empezar.</p>
+    <div class="r d3" style="text-align:center">
+      <a class="cta-go" href="mailto:sol@somospopcorn.com?cc=florencia@somospopcorn.com&subject=Access%20One%20%C2%B7%20Avancemos%20con%20la%20propuesta&body=Hola%20Sol%2C%20vimos%20la%20propuesta%20de%20adquisici%C3%B3n%20digital%20para%20Access%20One%20y%20queremos%20avanzar.">
+        Quiero avanzar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="close-sign r d4">
+      <img class="logo-pic close" src="img/logo-blanco.png" alt="Popcorn">
+      <span class="close-tag">Access One × Popcorn · Validar antes de escalar.</span>
+    </div>
+  </div>
+  <div class="sfoot"><span>Popcorn · Marketing, Comunicación &amp; Performance</span><span class="num">somospopcorn.com</span></div>
+</section>
+
+<script>
+/* ===== Progreso + topbar ===== */
+const prog=document.getElementById('prog'),topbar=document.getElementById('topbar');
+function onScroll(){
+  const h=document.documentElement.scrollHeight-innerHeight;
+  prog.style.width=(scrollY/h*100)+'%';
+  topbar.classList.toggle('scrolled',scrollY>40);
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ===== Nav lateral (dots) ===== */
+const sections=[...document.querySelectorAll('section')];
+const dots=document.getElementById('dots');
+sections.forEach(s=>{
+  const a=document.createElement('a');
+  a.href='#'+s.id;
+  a.innerHTML='<span>'+(s.dataset.label||s.id)+'</span>';
+  dots.appendChild(a);
+});
+const dotEls=[...dots.children];
+
+/* ===== Scroll reveal ===== */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.r,.scale-in,.flowline').forEach(el=>io.observe(el));
+
+/* ===== Sección activa para dots ===== */
+const active=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const i=sections.indexOf(e.target);
+      dotEls.forEach((d,k)=>d.classList.toggle('active',k===i));
+    }
+  });
+},{threshold:.5});
+sections.forEach(s=>active.observe(s));
+</script>
+</body>
+</html>
