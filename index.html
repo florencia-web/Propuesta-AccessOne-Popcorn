@@ -251,15 +251,62 @@ b,strong{color:#fff;font-weight:600}
   border:1.5px solid var(--cyan-line);border-radius:24px;padding:40px;
 }
 .invest-card .per{color:var(--w-65);font-family:'Poppins';font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:12px;margin-bottom:8px;display:block}
-.price-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:20px 0;border-bottom:1px solid var(--line-soft)}
+.price-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:18px 0;border-bottom:1px solid var(--line-soft);border-radius:10px;transition:background .25s var(--ease)}
 .price-row:last-child{border-bottom:none}
-.price-row .pl{font-family:'Poppins';font-weight:600;font-size:1.02rem}
+.price-row.svc-pick{cursor:pointer;padding:18px 14px;margin:0 -14px;border-bottom:1px solid var(--line-soft)}
+.price-row.svc-pick:hover{background:rgba(255,255,255,.04)}
+.price-row .pl{display:flex;align-items:flex-start;gap:14px;font-family:'Poppins';font-weight:600;font-size:1.02rem}
+.price-row .pl .pl-t{display:block}
 .price-row .pl small{display:block;font-weight:400;font-size:.82rem;color:var(--w-45);margin-top:4px;font-family:'Inter';max-width:34ch}
 .price-row .pv{font-family:'Poppins';font-weight:700;font-size:1.3rem;color:var(--cyan);white-space:nowrap}
+.price-row .chk,.price-row .chk-spacer{flex:none;width:20px;height:20px;margin-top:1px}
+.price-row .chk{border-radius:6px;border:1.5px solid var(--w-45);display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease)}
+.price-row .chk svg{width:12px;height:12px;color:var(--ink);opacity:0;transform:scale(.4);transition:all .2s var(--ease)}
+.price-row.svc-pick.on .chk{background:var(--cyan);border-color:var(--cyan)}
+.price-row.svc-pick.on .chk svg{opacity:1;transform:scale(1)}
+.price-row.svc-pick.on .pl-t{color:#fff}
 .bullets{list-style:none;display:flex;flex-direction:column;gap:18px}
 .bullets li{display:flex;gap:14px;align-items:flex-start}
 .bullets li .bi{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(31,232,216,.12);border:1px solid var(--cyan-line);color:var(--cyan);display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:700;font-size:13px;margin-top:2px}
 .bullets li p{color:var(--w-80);font-size:1rem;line-height:1.55}
+
+/* ============ ESCENARIOS DE MEDIOS ============ */
+.scen-mini{display:flex;gap:22px;margin-top:16px;flex-wrap:wrap}
+.scen-mini>div{display:flex;flex-direction:column}
+.scen-mini b{font-family:'Poppins';font-weight:700;color:var(--cyan);font-size:1.15rem;line-height:1}
+.scen-mini span{font-family:'Poppins';font-weight:600;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--w-45);margin-top:5px}
+.scen{margin-top:24px;border:1px solid var(--line-soft);border-radius:20px;background:var(--card);overflow:hidden}
+.scen-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;padding:24px 28px;border-bottom:1px solid var(--line-soft)}
+.scen-head .st{font-family:'Poppins';font-weight:700;font-size:1.25rem}
+.scen-head .st small{display:block;font-family:'Inter';font-weight:400;font-size:.82rem;color:var(--w-45);margin-top:3px}
+.scen-head .si{font-family:'Poppins';font-weight:700;color:var(--cyan);font-size:1.2rem;white-space:nowrap}
+.scen-note{padding:18px 28px;color:var(--w-65);font-size:.9rem;line-height:1.65;border-bottom:1px solid var(--line-soft)}
+.tbl-wrap{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;min-width:760px}
+.tbl th{font-family:'Poppins';font-weight:700;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);text-align:left;padding:14px 18px;border-bottom:1px solid var(--line-soft);white-space:nowrap}
+.tbl th.num{text-align:right}
+.tbl td{padding:14px 18px;font-size:.9rem;color:var(--w-80);border-bottom:1px solid var(--line-soft);vertical-align:top}
+.tbl td.num{text-align:right;font-family:'Poppins';font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl .plat{font-family:'Poppins';font-weight:600;color:#fff;white-space:nowrap}
+.tbl .obj{color:var(--w-45);font-size:.82rem;line-height:1.4;min-width:190px}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr.total td{border-top:1.5px solid var(--cyan-line);background:rgba(31,232,216,.07);font-family:'Poppins';font-weight:700;color:#fff}
+.tbl tr.total td.num{color:var(--cyan)}
+.tbl tr.total td:first-child{letter-spacing:.04em}
+/* tarjetas de escenario seleccionables */
+.scen-pick{cursor:pointer;user-select:none}
+.scen-pick .pick{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line-soft);font-family:'Poppins';font-weight:600;font-size:.82rem;letter-spacing:.03em;color:var(--w-45);transition:color .3s var(--ease)}
+.scen-pick .pick .radio{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--w-45);flex:none;display:flex;align-items:center;justify-content:center;transition:all .3s var(--ease)}
+.scen-pick .pick .radio::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--cyan);transform:scale(0);transition:transform .25s var(--ease)}
+.scen-pick.selected{border-color:var(--cyan);background:rgba(31,232,216,.08);box-shadow:0 0 0 1px var(--cyan) inset,0 14px 40px rgba(31,232,216,.18)}
+.scen-pick.selected .pick{color:var(--cyan)}
+.scen-pick.selected .pick .radio{border-color:var(--cyan)}
+.scen-pick.selected .pick .radio::after{transform:scale(1)}
+.scen-pick .pick .lbl-on{display:none}
+.scen-pick.selected .pick .lbl-off{display:none}
+.scen-pick.selected .pick .lbl-on{display:inline}
+#ctaPick{font-family:'Poppins';font-weight:600;font-size:.95rem;color:var(--cyan);margin-top:22px;min-height:1.2em}
+#ctaPick .none{color:var(--w-45);font-weight:500}
 
 /* ============ WIREFRAME / DASHBOARD ============ */
 .landing{display:grid;grid-template-columns:.92fr 1.08fr;gap:46px;align-items:center}
@@ -321,7 +368,7 @@ b,strong{color:#fff;font-weight:600}
 .phases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
 .phase-card{position:relative;border:1px solid var(--line-soft);border-radius:20px;padding:32px 28px;background:var(--card);overflow:hidden;transition:all .4s var(--ease)}
 .phase-card:hover{transform:translateY(-6px);border-color:var(--cyan-line)}
-.phase-card .pn{font-family:'Poppins';font-weight:700;font-size:3rem;color:rgba(31,232,216,.18);line-height:1;position:absolute;top:18px;right:24px}
+.phase-card .pn{font-family:'Poppins';font-weight:700;font-size:3rem;color:rgba(31,232,216,.42);line-height:1;position:absolute;top:18px;right:24px}
 .phase-card h3{font-family:'Poppins';font-weight:600;font-size:1.4rem;margin-bottom:12px}
 .phase-card .gp{font-family:'Poppins';font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;display:block}
 .phase-card p{color:var(--w-65);font-size:.95rem;line-height:1.6}
@@ -743,7 +790,7 @@ b,strong{color:#fff;font-weight:600}
 <section id="roadmap" data-label="Roadmap">
   <div class="wrap">
     <div class="eyebrow r">Roadmap de implementación</div>
-    <h2 class="h-lg r d1">Los primeros <span class="cy">90 días</span>, y el camino al año 1.</h2>
+    <h2 class="h-lg r d1">Los primeros <span class="cy">90 días</span>, y el camino al primer año.</h2>
     <p class="lead r d2" style="margin-top:20px">Esperamos un período de aprendizaje de 60 a 90 días antes de alcanzar indicadores estables. Este es el plan para llegar ahí con orden.</p>
 
     <div class="tl r d3">
@@ -862,7 +909,6 @@ b,strong{color:#fff;font-weight:600}
       </div>
     </div>
 
-    <p class="r d4" style="margin-top:34px"><span class="note-pill"><b>Meta año 1</b> · 160–180 nuevas cápitas · ticket estimado USD 40–50 / mes por cápita</span></p>
   </div>
   <div class="sfoot"><span>Optimizamos al CAC y a la venta, no a la vanidad</span><span class="num">11 — KPIs</span></div>
 </section>
@@ -948,25 +994,25 @@ b,strong{color:#fff;font-weight:600}
     <div class="invest r d3" style="margin-top:50px">
       <div class="invest-card scale-in">
         <span class="per">Estructura de inversión</span>
-        <div class="price-row">
-          <div class="pl">Discovery &amp; setup inicial<small>Investigación, embudo, arquitectura de landing y tracking · pago único</small></div>
-          <div class="pv">USD 0</div>
+        <div class="price-row svc-pick on" data-svc="Discovery &amp; setup inicial" data-price="$1.330.000 + IVA">
+          <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Discovery &amp; setup inicial<small>Investigación, embudo, arquitectura de landing y tracking · pago único</small></span></div>
+          <div class="pv">$1.330.000<span style="font-size:.68rem;color:var(--w-45);font-weight:500;letter-spacing:.04em"> + IVA</span></div>
+        </div>
+        <div class="price-row svc-pick on" data-svc="Fee mensual de gestión" data-price="$776.000 + IVA / mes">
+          <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Fee mensual de gestión<small>Estrategia, performance, optimización y reporting</small></span></div>
+          <div class="pv">$776.000<span style="font-size:.68rem;color:var(--w-45);font-weight:500;letter-spacing:.04em"> + IVA</span></div>
+        </div>
+        <div class="price-row svc-pick on" data-svc="Acompañamiento estratégico mensual (15 hs/mes)" data-price="$1.430.000 + IVA / mes">
+          <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Acompañamiento estratégico mensual<small>Consultoría y dirección estratégica · 15 hs/mes</small></span></div>
+          <div class="pv">$1.430.000<span style="font-size:.68rem;color:var(--w-45);font-weight:500;letter-spacing:.04em"> + IVA</span></div>
         </div>
         <div class="price-row">
-          <div class="pl">Fee mensual de gestión<small>Estrategia, performance, optimización y reporting</small></div>
-          <div class="pv">USD 0</div>
-        </div>
-        <div class="price-row">
-          <div class="pl">Acompañamiento estratégico mensual<small>Consultoría y dirección estratégica · 15 hs/mes</small></div>
-          <div class="pv">USD 0</div>
-        </div>
-        <div class="price-row">
-          <div class="pl">Inversión en medios (pauta)<small>La abona Access One directamente · Popcorn analiza y recomienda la mejor estrategia de inversión</small></div>
+          <div class="pl"><span class="chk-spacer"></span><span class="pl-t">Inversión en medios (pauta)<small>La abona Access One directamente · Popcorn analiza y recomienda la mejor estrategia de inversión</small></span></div>
           <div class="pv">A definir</div>
         </div>
-        <div class="price-row">
-          <div class="pl">Desarrollo / CRO de landing<small>Opcional · se cotiza por separado</small></div>
-          <div class="pv">USD 0</div>
+        <div class="price-row svc-pick" data-svc="Desarrollo / CRO de landing" data-price="$1.270.000 + IVA">
+          <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Desarrollo / CRO de landing<small>Opcional · no incluye hosting ni certificados SSL</small></span></div>
+          <div class="pv">$1.270.000<span style="font-size:.68rem;color:var(--w-45);font-weight:500;letter-spacing:.04em"> + IVA</span></div>
         </div>
       </div>
       <ul class="bullets">
@@ -976,12 +1022,171 @@ b,strong{color:#fff;font-weight:600}
         <li><span class="bi">4</span><p><b>Foco en el retorno.</b> El objetivo no es gastar más, sino construir un CAC sano que permita escalar con confianza.</p></li>
       </ul>
     </div>
-    <p class="r d4" style="margin-top:30px"><span class="note-pill"><b>Valores a completar</b> · esta estructura queda lista para definir los montos finales en USD</span></p>
   </div>
   <div class="sfoot"><span>Construir un activo, no comprar clics</span><span class="num">14 — Inversión</span></div>
 </section>
 
-<!-- ============ 16 · CIERRE COMERCIAL ============ -->
+<!-- ============ 15 · ENFOQUE / CÓMO LEER LOS NÚMEROS ============ -->
+<section id="enfoque" data-label="Cómo leer los números">
+  <div class="wrap">
+    <div class="eyebrow r">Cómo leer estos números</div>
+    <h2 class="h-lg r d1" style="max-width:20ch">Access One no es un seguro de viaje<br>ni una <span class="cy">prepaga.</span></h2>
+    <p class="lead r d2" style="margin-top:22px">Es un producto premium de venta consultiva, más cerca de un servicio financiero/salud. El usuario no compra en el primer clic: primero hay que educarlo, generar confianza y recién después convertirlo. Por eso tomamos benchmarks de B2B y venta consultiva —no de seguros de viaje ni de medicina prepaga—.</p>
+
+    <div class="grid g4 r d3" style="margin-top:50px">
+      <div class="card">
+        <span class="num-tag">01</span>
+        <h3>Venta consultiva</h3>
+        <p>Educar → generar confianza → convertir. El ciclo de decisión es más largo y deliberado que el de un producto de impulso.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">02</span>
+        <h3>El CPL mejora con el tiempo</h3>
+        <p>Los CPL iniciales son más altos y bajan a medida que el algoritmo aprende y se optimiza el mensaje. La conversión crece con la madurez de la cuenta.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">03</span>
+        <h3>Cada canal, su rol</h3>
+        <p>Google captura demanda existente con un CPL más bajo. LinkedIn y las campañas de awareness cuestan más, pero cumplen el rol de generar demanda nueva.</p>
+      </div>
+      <div class="card">
+        <span class="num-tag">04</span>
+        <h3>Proyecciones conservadoras</h3>
+        <p>En la etapa de validación preferimos quedarnos cortos. Siempre habrá tiempo de superar las metas una vez que el modelo demuestre rentabilidad.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sfoot"><span>Benchmarks B2B y venta consultiva, no seguros de viaje</span><span class="num">15 — Enfoque</span></div>
+</section>
+
+<!-- ============ 16 · ESCENARIOS DE INVERSIÓN EN MEDIOS ============ -->
+<section id="escenarios" data-label="Escenarios de medios">
+  <div class="wrap">
+    <div class="eyebrow r">Escenarios de inversión en medios</div>
+    <h2 class="h-lg r d1">Tres niveles para <span class="cy">validar</span> el mercado.</h2>
+    <p class="lead r d2" style="margin-top:20px">Tres puntos de partida posibles para la pauta mensual —que define y abona Access One directamente—. A mayor inversión, más volumen de leads y mejor eficiencia a medida que se diversifican y optimizan los canales.</p>
+
+    <!-- comparativa rápida · seleccionable -->
+    <p class="r d3" style="margin-top:40px;margin-bottom:18px;color:var(--w-65);font-size:.95rem"><span class="note-pill"><b>Elegí una opción</b> · al seleccionar un escenario, queda incluido en el correo de &ldquo;Quiero avanzar&rdquo;</span></p>
+    <div class="grid g3 r d3">
+      <div class="card scen-pick" data-scen="1">
+        <span class="num-tag">Escenario 1 · Inicial</span>
+        <div style="font-family:'Poppins';font-weight:700;font-size:1.7rem;line-height:1">ARS 1.500.000<span style="font-size:.9rem;color:var(--w-45);font-weight:500"> / mes</span></div>
+        <div class="scen-mini">
+          <div><b>28</b><span>Leads / mes</span></div>
+          <div><b>$54.446</b><span>CPL prom.</span></div>
+          <div><b>2,60%</b><span>Conv. prom.</span></div>
+        </div>
+        <p style="margin-top:16px;font-size:.86rem;color:var(--w-65)">Google + Meta · sin LinkedIn</p>
+        <div class="pick"><span class="radio"></span><span class="lbl-off">Elegir esta opción</span><span class="lbl-on">Opción elegida</span></div>
+      </div>
+      <div class="card scen-pick" data-scen="2">
+        <span class="num-tag">Escenario 2 · Intermedio</span>
+        <div style="font-family:'Poppins';font-weight:700;font-size:1.7rem;line-height:1">ARS 2.500.000<span style="font-size:.9rem;color:var(--w-45);font-weight:500"> / mes</span></div>
+        <div class="scen-mini">
+          <div><b>56</b><span>Leads / mes</span></div>
+          <div><b>$44.643</b><span>CPL prom.</span></div>
+          <div><b>3,01%</b><span>Conv. prom.</span></div>
+        </div>
+        <p style="margin-top:16px;font-size:.86rem;color:var(--w-65)">Google + Meta + LinkedIn</p>
+        <div class="pick"><span class="radio"></span><span class="lbl-off">Elegir esta opción</span><span class="lbl-on">Opción elegida</span></div>
+      </div>
+      <div class="card scen-pick" data-scen="3">
+        <span class="num-tag">Escenario 3 · Escala</span>
+        <div style="font-family:'Poppins';font-weight:700;font-size:1.7rem;line-height:1">ARS 4.000.000<span style="font-size:.9rem;color:var(--w-45);font-weight:500"> / mes</span></div>
+        <div class="scen-mini">
+          <div><b>100</b><span>Leads / mes</span></div>
+          <div><b>$40.000</b><span>CPL prom.</span></div>
+          <div><b>3,28%</b><span>Conv. prom.</span></div>
+        </div>
+        <p style="margin-top:16px;font-size:.86rem;color:var(--w-65)">Todos los canales activos</p>
+        <div class="pick"><span class="radio"></span><span class="lbl-off">Elegir esta opción</span><span class="lbl-on">Opción elegida</span></div>
+      </div>
+    </div>
+
+    <!-- ESCENARIO 1 -->
+    <div class="scen r d4">
+      <div class="scen-head">
+        <div class="st">Escenario 1 · Inicial<small>Foco en capturar intención y recuperar interesados</small></div>
+        <div class="si">ARS 1.500.000 / mes</div>
+      </div>
+      <div class="scen-note">En este presupuesto descartamos LinkedIn: el costo por clic y el volumen alcanzable no justifican la inversión inicial. Conviene concentrar el presupuesto en capturar intención con Google y hacer remarketing en Meta, para no fragmentar la inversión y priorizar las plataformas de mayor volumen y eficiencia en la etapa inicial.</div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Plataforma</th><th>Objetivo</th>
+              <th class="num">Inversión</th><th class="num">Clics</th><th class="num">CPC medio</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">Conv.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="plat">Google Search</td><td class="obj">Captación de demanda (alta intención)</td><td class="num">$900.000</td><td class="num">520</td><td class="num">$1.731</td><td class="num">16</td><td class="num">$57.692</td><td class="num">3,00%</td></tr>
+            <tr><td class="plat">Google Demand Gen</td><td class="obj">Generación de conocimiento y consideración</td><td class="num">$360.000</td><td class="num">310</td><td class="num">$1.161</td><td class="num">6</td><td class="num">$58.065</td><td class="num">2,00%</td></tr>
+            <tr><td class="plat">Meta Ads</td><td class="obj">Remarketing y recuperación de usuarios interesados</td><td class="num">$240.000</td><td class="num">230</td><td class="num">$1.043</td><td class="num">6</td><td class="num">$41.739</td><td class="num">2,50%</td></tr>
+            <tr class="total"><td>Total / Prom.</td><td class="obj"></td><td class="num">$1.500.000</td><td class="num">1.060</td><td class="num">$1.415</td><td class="num">28</td><td class="num">$54.446</td><td class="num">2,60%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ESCENARIO 2 -->
+    <div class="scen r d5">
+      <div class="scen-head">
+        <div class="st">Escenario 2 · Intermedio<small>Se suma LinkedIn para alcanzar perfiles ejecutivos</small></div>
+        <div class="si">ARS 2.500.000 / mes</div>
+      </div>
+      <div class="scen-note">Con mayor presupuesto incorporamos LinkedIn para sumar posicionamiento y tráfico calificado de perfiles ejecutivos, manteniendo el grueso de la inversión en Google y Meta. Más volumen de leads y mejor eficiencia promedio que el escenario inicial.</div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Plataforma</th><th>Objetivo</th>
+              <th class="num">Inversión</th><th class="num">Clics</th><th class="num">CPC medio</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">Conv.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="plat">Google Search</td><td class="obj">Captación de demanda (alta intención)</td><td class="num">$1.200.000</td><td class="num">760</td><td class="num">$1.579</td><td class="num">30</td><td class="num">$39.474</td><td class="num">4,00%</td></tr>
+            <tr><td class="plat">Google Demand Gen</td><td class="obj">Generación de conocimiento y consideración</td><td class="num">$700.000</td><td class="num">560</td><td class="num">$1.250</td><td class="num">11</td><td class="num">$62.500</td><td class="num">2,00%</td></tr>
+            <tr><td class="plat">Meta Ads</td><td class="obj">Remarketing y recuperación de usuarios interesados</td><td class="num">$350.000</td><td class="num">420</td><td class="num">$833</td><td class="num">13</td><td class="num">$27.778</td><td class="num">3,00%</td></tr>
+            <tr><td class="plat">LinkedIn Ads</td><td class="obj">Posicionamiento y tráfico calificado de perfiles ejecutivos</td><td class="num">$250.000</td><td class="num">120</td><td class="num">$2.083</td><td class="num">2</td><td class="num">$138.889</td><td class="num">1,50%</td></tr>
+            <tr class="total"><td>Total / Prom.</td><td class="obj"></td><td class="num">$2.500.000</td><td class="num">1.860</td><td class="num">$1.344</td><td class="num">56</td><td class="num">$44.643</td><td class="num">3,01%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ESCENARIO 3 -->
+    <div class="scen r d6">
+      <div class="scen-head">
+        <div class="st">Escenario 3 · Escala<small>Todos los canales activos, mayor volumen de leads</small></div>
+        <div class="si">ARS 4.000.000 / mes</div>
+      </div>
+      <div class="scen-note">Escala de inversión con todos los canales activos: más volumen de leads manteniendo un CPL promedio eficiente. El mix diversificado combina captación de alta intención, generación de demanda, remarketing y posicionamiento ejecutivo.</div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Plataforma</th><th>Objetivo</th>
+              <th class="num">Inversión</th><th class="num">Clics</th><th class="num">CPC medio</th><th class="num">Leads</th><th class="num">CPL</th><th class="num">Conv.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="plat">Google Search</td><td class="obj">Captación de demanda (alta intención)</td><td class="num">$1.700.000</td><td class="num">1.180</td><td class="num">$1.441</td><td class="num">53</td><td class="num">$32.075</td><td class="num">4,00%</td></tr>
+            <tr><td class="plat">Google Demand Gen</td><td class="obj">Generación de conocimiento y consideración</td><td class="num">$1.100.000</td><td class="num">900</td><td class="num">$1.222</td><td class="num">20</td><td class="num">$55.000</td><td class="num">4,50%</td></tr>
+            <tr><td class="plat">Meta Ads</td><td class="obj">Remarketing y recuperación de usuarios interesados</td><td class="num">$600.000</td><td class="num">720</td><td class="num">$833</td><td class="num">22</td><td class="num">$27.273</td><td class="num">3,00%</td></tr>
+            <tr><td class="plat">LinkedIn Ads</td><td class="obj">Posicionamiento y tráfico calificado de perfiles ejecutivos</td><td class="num">$600.000</td><td class="num">250</td><td class="num">$2.400</td><td class="num">5</td><td class="num">$120.000</td><td class="num">2,00%</td></tr>
+            <tr class="total"><td>Total / Prom.</td><td class="obj"></td><td class="num">$4.000.000</td><td class="num">3.050</td><td class="num">$1.311</td><td class="num">100</td><td class="num">$40.000</td><td class="num">3,28%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="r d7" style="margin-top:30px"><span class="note-pill"><b>Cifras estimativas</b> · proyección conservadora para la etapa de validación · se ajustan con datos reales de campaña</span></p>
+  </div>
+  <div class="sfoot"><span>La pauta la define y abona Access One directamente</span><span class="num">16 — Escenarios</span></div>
+</section>
+
+<!-- ============ 17 · CIERRE COMERCIAL ============ -->
 <section id="cierre" data-label="Cierre">
   <div class="bg-photo center"><img src="img/cierre.jpg" alt="Acceso a la mejor medicina del mundo"></div>
   <div class="hero-orbits" style="left:-200px;right:auto"><div></div><div></div><div></div><div class="core"></div></div>
@@ -990,7 +1195,8 @@ b,strong{color:#fff;font-weight:600}
     <h2 class="close-title r d1">No proponemos pauta.<br>Proponemos construir el <span class="cy">modelo</span><br>de adquisición de Access One en Argentina.</h2>
     <p class="lead r d2" style="margin:28px auto 0;text-align:center">Validar antes de escalar. Aprender qué funciona, optimizarlo y crecer sobre certezas. Estamos listos para empezar.</p>
     <div class="r d3" style="text-align:center">
-      <a class="cta-go" href="mailto:sol@somospopcorn.com?cc=florencia@somospopcorn.com&subject=Access%20One%20%C2%B7%20Avancemos%20con%20la%20propuesta&body=Hola%20Sol%2C%20vimos%20la%20propuesta%20de%20adquisici%C3%B3n%20digital%20para%20Access%20One%20y%20queremos%20avanzar.">
+      <p id="ctaPick"></p>
+      <a class="cta-go" id="ctaGo" href="mailto:sol@somospopcorn.com?cc=florencia@somospopcorn.com&subject=Access%20One%20%C2%B7%20Avancemos%20con%20la%20propuesta&body=Hola%20Sol%2C%20vimos%20la%20propuesta%20de%20adquisici%C3%B3n%20digital%20para%20Access%20One%20y%20queremos%20avanzar.">
         Quiero avanzar
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
       </a>
@@ -1040,6 +1246,49 @@ const active=new IntersectionObserver((entries)=>{
   });
 },{threshold:.5});
 sections.forEach(s=>active.observe(s));
+
+/* ===== Selección de escenario de inversión ===== */
+const scenData={
+  '1':{label:'Escenario 1 · Inicial',inv:'ARS 1.500.000 / mes',leads:'28',cpl:'$54.446',conv:'2,60%',mix:'Google + Meta (sin LinkedIn)'},
+  '2':{label:'Escenario 2 · Intermedio',inv:'ARS 2.500.000 / mes',leads:'56',cpl:'$44.643',conv:'3,01%',mix:'Google + Meta + LinkedIn'},
+  '3':{label:'Escenario 3 · Escala',inv:'ARS 4.000.000 / mes',leads:'100',cpl:'$40.000',conv:'3,28%',mix:'Todos los canales activos'}
+};
+const picks=[...document.querySelectorAll('.scen-pick')];
+const ctaGo=document.getElementById('ctaGo');
+const ctaPick=document.getElementById('ctaPick');
+const svcPicks=[...document.querySelectorAll('.svc-pick')];
+let selScen=null;
+function buildMail(){
+  let subject='Access One · Avancemos con la propuesta';
+  let body='Hola Sol, vimos la propuesta de adquisición digital para Access One y queremos avanzar.';
+  const svcs=svcPicks.filter(s=>s.classList.contains('on'));
+  if(svcs.length){
+    body+='\n\nServicios con los que queremos avanzar:';
+    svcs.forEach(s=>{body+='\n• '+s.dataset.svc+' — '+s.dataset.price;});
+  }
+  if(selScen && scenData[selScen]){
+    const s=scenData[selScen];
+    subject='Access One · Avancemos · '+s.label;
+    body+='\n\nOpción de inversión en medios elegida:\n• '+s.label+'\n• Inversión: '+s.inv+'\n• Leads estimados: '+s.leads+' / mes\n• CPL promedio: '+s.cpl+'\n• Conversión promedio: '+s.conv+'\n• Mix de canales: '+s.mix;
+  }
+  const parts=[];
+  if(svcs.length){parts.push(svcs.length+' servicio'+(svcs.length>1?'s':''));}
+  if(selScen){parts.push(scenData[selScen].label);}
+  ctaPick.innerHTML = parts.length ? 'Avanzás con: <b>'+parts.join('</b> + <b>')+'</b>' : '<span class="none">Elegí servicios e inversión más arriba para incluirlos en el correo.</span>';
+  ctaGo.href='mailto:sol@somospopcorn.com?cc=florencia@somospopcorn.com&subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+}
+picks.forEach(p=>{
+  p.addEventListener('click',()=>{
+    const wasSel=p.classList.contains('selected');
+    picks.forEach(x=>x.classList.remove('selected'));
+    if(wasSel){selScen=null;}else{p.classList.add('selected');selScen=p.dataset.scen;}
+    buildMail();
+  });
+});
+svcPicks.forEach(s=>{
+  s.addEventListener('click',()=>{ s.classList.toggle('on'); buildMail(); });
+});
+buildMail();
 </script>
 </body>
 </html>
