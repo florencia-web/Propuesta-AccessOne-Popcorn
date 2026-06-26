@@ -258,6 +258,7 @@ b,strong{color:#fff;font-weight:600}
 .price-row .pl{display:flex;align-items:flex-start;gap:14px;font-family:'Poppins';font-weight:600;font-size:1.02rem}
 .price-row .pl .pl-t{display:block}
 .price-row .pl small{display:block;font-weight:400;font-size:.82rem;color:var(--w-45);margin-top:4px;font-family:'Inter';max-width:34ch}
+.price-row .pl small.varfee{font-family:'Poppins';font-weight:600;font-size:.8rem;color:var(--cyan);margin-top:7px}
 .price-row .pv{font-family:'Poppins';font-weight:700;font-size:1.3rem;color:var(--cyan);white-space:nowrap}
 .price-row .chk,.price-row .chk-spacer{flex:none;width:20px;height:20px;margin-top:1px}
 .price-row .chk{border-radius:6px;border:1.5px solid var(--w-45);display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease)}
@@ -1013,8 +1014,8 @@ table.tbl{width:100%;border-collapse:collapse;min-width:760px}
 
         <div class="inv-group">
           <div class="inv-ghead">Inversión mensual <span class="inv-sub" id="subMonth">—</span></div>
-          <div class="price-row svc-pick on" data-svc="Fee mensual de gestión" data-price="$776.000 + IVA / mes" data-type="month" data-amount="776000">
-            <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Fee mensual de gestión<small>Estrategia, performance, optimización y reporting</small></span></div>
+          <div class="price-row svc-pick on" data-svc="Fee mensual de gestión" data-price="$776.000 + IVA / mes + 15% variable sobre la inversión ejecutada en plataformas" data-type="month" data-amount="776000">
+            <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Fee mensual de gestión<small>Estrategia, performance, optimización y reporting</small><small class="varfee">+ 15% variable sobre la inversión ejecutada en plataformas</small></span></div>
             <div class="pv">$776.000<span class="ivatag"> + IVA</span></div>
           </div>
           <div class="price-row svc-pick on" data-svc="Acompañamiento estratégico mensual (15 hs/mes)" data-price="$1.430.000 + IVA / mes" data-type="month" data-amount="1430000">
