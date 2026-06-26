@@ -265,6 +265,10 @@ b,strong{color:#fff;font-weight:600}
 .price-row.svc-pick.on .chk{background:var(--cyan);border-color:var(--cyan)}
 .price-row.svc-pick.on .chk svg{opacity:1;transform:scale(1)}
 .price-row.svc-pick.on .pl-t{color:#fff}
+.pv .ivatag{font-size:.68rem;color:var(--w-45);font-weight:500;letter-spacing:.04em}
+.inv-group+.inv-group{margin-top:22px}
+.inv-ghead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:'Poppins';font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);padding-bottom:8px;border-bottom:1px solid var(--cyan-line);margin-bottom:2px}
+.inv-ghead .inv-sub{font-family:'Poppins';font-weight:700;font-size:1rem;letter-spacing:0;text-transform:none;color:#fff;white-space:nowrap}
 .bullets{list-style:none;display:flex;flex-direction:column;gap:18px}
 .bullets li{display:flex;gap:14px;align-items:flex-start}
 .bullets li .bi{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(31,232,216,.12);border:1px solid var(--cyan-line);color:var(--cyan);display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:700;font-size:13px;margin-top:2px}
@@ -994,25 +998,33 @@ table.tbl{width:100%;border-collapse:collapse;min-width:760px}
     <div class="invest r d3" style="margin-top:50px">
       <div class="invest-card scale-in">
         <span class="per">Estructura de inversión</span>
-        <div class="price-row svc-pick on" data-svc="Discovery &amp; setup inicial" data-price="$1.330.000 + IVA">
-          <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Discovery &amp; setup inicial<small>Investigación, embudo, arquitectura de landing y tracking · pago único</small></span></div>
-          <div class="pv">$1.330.000<span style="font-size:.68rem;color:var(--w-45);font-weight:500;letter-spacing:.04em"> + IVA</span></div>
+
+        <div class="inv-group">
+          <div class="inv-ghead">Pago único <span class="inv-sub" id="subOnce">—</span></div>
+          <div class="price-row svc-pick on" data-svc="Discovery &amp; setup inicial" data-price="$1.330.000 + IVA" data-type="once" data-amount="1330000">
+            <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Discovery &amp; setup inicial<small>Investigación, embudo, arquitectura de landing y tracking · pago único</small></span></div>
+            <div class="pv">$1.330.000<span class="ivatag"> + IVA</span></div>
+          </div>
+          <div class="price-row svc-pick" data-svc="Desarrollo / CRO de landing" data-price="$1.270.000 + IVA" data-type="once" data-amount="1270000">
+            <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Desarrollo / CRO de landing<small>Opcional · no incluye hosting ni certificados SSL</small></span></div>
+            <div class="pv">$1.270.000<span class="ivatag"> + IVA</span></div>
+          </div>
         </div>
-        <div class="price-row svc-pick on" data-svc="Fee mensual de gestión" data-price="$776.000 + IVA / mes">
-          <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Fee mensual de gestión<small>Estrategia, performance, optimización y reporting</small></span></div>
-          <div class="pv">$776.000<span style="font-size:.68rem;color:var(--w-45);font-weight:500;letter-spacing:.04em"> + IVA</span></div>
-        </div>
-        <div class="price-row svc-pick on" data-svc="Acompañamiento estratégico mensual (15 hs/mes)" data-price="$1.430.000 + IVA / mes">
-          <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Acompañamiento estratégico mensual<small>Consultoría y dirección estratégica · 15 hs/mes</small></span></div>
-          <div class="pv">$1.430.000<span style="font-size:.68rem;color:var(--w-45);font-weight:500;letter-spacing:.04em"> + IVA</span></div>
-        </div>
-        <div class="price-row">
-          <div class="pl"><span class="chk-spacer"></span><span class="pl-t">Inversión en medios (pauta)<small>La abona Access One directamente · Popcorn analiza y recomienda la mejor estrategia de inversión</small></span></div>
-          <div class="pv">A definir</div>
-        </div>
-        <div class="price-row svc-pick" data-svc="Desarrollo / CRO de landing" data-price="$1.270.000 + IVA">
-          <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Desarrollo / CRO de landing<small>Opcional · no incluye hosting ni certificados SSL</small></span></div>
-          <div class="pv">$1.270.000<span style="font-size:.68rem;color:var(--w-45);font-weight:500;letter-spacing:.04em"> + IVA</span></div>
+
+        <div class="inv-group">
+          <div class="inv-ghead">Inversión mensual <span class="inv-sub" id="subMonth">—</span></div>
+          <div class="price-row svc-pick on" data-svc="Fee mensual de gestión" data-price="$776.000 + IVA / mes" data-type="month" data-amount="776000">
+            <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Fee mensual de gestión<small>Estrategia, performance, optimización y reporting</small></span></div>
+            <div class="pv">$776.000<span class="ivatag"> + IVA</span></div>
+          </div>
+          <div class="price-row svc-pick on" data-svc="Acompañamiento estratégico mensual (15 hs/mes)" data-price="$1.430.000 + IVA / mes" data-type="month" data-amount="1430000">
+            <div class="pl"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="pl-t">Acompañamiento estratégico mensual<small>Consultoría y dirección estratégica · 15 hs/mes</small></span></div>
+            <div class="pv">$1.430.000<span class="ivatag"> + IVA</span></div>
+          </div>
+          <div class="price-row">
+            <div class="pl"><span class="chk-spacer"></span><span class="pl-t">Inversión en medios (pauta)<small>La abona Access One directamente · Popcorn analiza y recomienda la mejor estrategia de inversión</small></span></div>
+            <div class="pv">A definir</div>
+          </div>
         </div>
       </div>
       <ul class="bullets">
@@ -1257,14 +1269,23 @@ const picks=[...document.querySelectorAll('.scen-pick')];
 const ctaGo=document.getElementById('ctaGo');
 const ctaPick=document.getElementById('ctaPick');
 const svcPicks=[...document.querySelectorAll('.svc-pick')];
+const fmtAr=n=>'$'+Number(n).toLocaleString('es-AR');
 let selScen=null;
 function buildMail(){
   let subject='Access One · Avancemos con la propuesta';
   let body='Hola Sol, vimos la propuesta de adquisición digital para Access One y queremos avanzar.';
   const svcs=svcPicks.filter(s=>s.classList.contains('on'));
+  let onceT=0,monthT=0;
+  svcs.forEach(s=>{const a=Number(s.dataset.amount)||0;if(s.dataset.type==='once'){onceT+=a;}else{monthT+=a;}});
+  const subO=document.getElementById('subOnce'),subM=document.getElementById('subMonth');
+  if(subO){subO.textContent = onceT? fmtAr(onceT)+' + IVA' : '—';}
+  if(subM){subM.textContent = monthT? fmtAr(monthT)+' + IVA / mes' : '—';}
   if(svcs.length){
     body+='\n\nServicios con los que queremos avanzar:';
     svcs.forEach(s=>{body+='\n• '+s.dataset.svc+' — '+s.dataset.price;});
+    body+='\n\nResumen Popcorn:';
+    if(onceT){body+='\n• Pago único: '+fmtAr(onceT)+' + IVA';}
+    if(monthT){body+='\n• Inversión mensual: '+fmtAr(monthT)+' + IVA / mes';}
   }
   if(selScen && scenData[selScen]){
     const s=scenData[selScen];
